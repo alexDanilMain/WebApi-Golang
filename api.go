@@ -23,6 +23,14 @@ func (s *APIServer) Run() error {
 		w.Write([]byte("User ID: " + userID))
 	})
 
+	router.HandleFunc("GET /users", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Gets all users"))
+	})
+
+	router.HandleFunc("POST /users", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Post a user"))
+	})
+
 	router.HandleFunc("/users/{userID}", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("This route only has a GET request!"))
 	})
