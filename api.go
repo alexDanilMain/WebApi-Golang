@@ -18,6 +18,11 @@ func NewApiServer(address string) *APIServer {
 func (s *APIServer) Run() error {
 	router := http.NewServeMux()
 
+	router.HandleFunc("/users/{userID}", func(w http.ResponseWriter, r *http.Request) {
+		userID := r.PathValue("userID")
+		w.Write([]byte("User ID: " + userID))
+	})
+
 	server := http.Server{
 		Addr:    s.address,
 		Handler: router,
