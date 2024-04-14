@@ -18,9 +18,13 @@ func NewApiServer(address string) *APIServer {
 func (s *APIServer) Run() error {
 	router := http.NewServeMux()
 
-	router.HandleFunc("/users/{userID}", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("GET /users/{userID}", func(w http.ResponseWriter, r *http.Request) {
 		userID := r.PathValue("userID")
 		w.Write([]byte("User ID: " + userID))
+	})
+
+	router.HandleFunc("/users/{userID}", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("This route only has a GET request!"))
 	})
 
 	server := http.Server{
